@@ -17,6 +17,14 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link " href="/">HOME <span class="sr-only"></span></a>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                <span style="color:white;padding:15px;">{{current_user.username}}</span>
+                <span><a href="{{url_for('auth.logout')}}">Sign out</a></span>
+                {% else %}
+                <span><a href="{{url_for('auth.login')}}">Sign in</a></span>
+                {%endif%}
+              </ul>
             
           </div>
         </div>
