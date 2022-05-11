@@ -1,37 +1,56 @@
 {% extends 'base.html'%}
-{% block title %}My Profile{% endblock %} 
+{% block title %}My Profile{% endblock %}
 {% block content %}
 <div class="container">
-<div class="row">
-<!-- displaying  Username-->
-  <div class="col-md-4">
-    <h3> {{user.username| capitalize}} </h3>
+  <div class="row">
+    <!-- displaying  Username-->
+    <div class="col-md-4">
 
-    <!--Displaying user bio-->
-    {% if user.bio %}
-      <p>{{user.bio}}</p>
-    {%else%}
+      <h3> {{user.username| capitalize}}</h3>
+
+
+      <!--Displaying user bio-->
+      {% if user.bio %}
+      <h4>{{user.bio}}</h4>
+      {%else%}
       <p> {{user.username| capitalize}} has no bio </p>
-    {% endif %}
-  </div>
-
-  <!--Display profile photo-->
-  <div class="col-md-4">
-    {% if user.profile_pic_path %}
-
-    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
-
-    {%else%}
-    <p>No profile picture</p>
-
-    {% endif %}
-
-        {% if user == current_user %}
-    <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
-
-      <input type="file"  name="photo" class="form-control" required>
-      <input type="submit">
-    </form>
       {% endif %}
+
+      {% if user.profile_pic_path %}
+
+      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+
+      {%else%}
+      <p>No profile picture</p>
+
+      {% endif %}
+
+
+    
+
+    <!--Display profile photo-->
+
+   <br><br> <details>
+      <summary title="Profile Settings"><i class="fa-solid fa-gear" style="font-size:xx-large"></i> </summary>
+      {% if user == current_user %}
+      <div align="center">
+      <a href="{{url_for('main.update_profile',uname=user.username)}}" style="text-decoration:none;"><imput style="text-decoration:none;font-size: medium; border:1px gold solid;color:blue; border-radius: 5rem; padding:6px">Update Bio</input></a>
+      </div><br>
+      {% endif %}
+
+      {% if user == current_user %}
+      <form action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype="multipart/form-data" align="center">
+
+        <input type="file" name="photo" class="form-control" required><br>
+        <input type="submit" value="Update Pic" style="border:1px gold solid;;font-size:medium;color:blue; border-radius:5rem; background-color:transparent">
+      </form>
+      {% endif %} 
+      
+
+    </details>
   </div>
-{% endblock %}
+  </div>
+
+
+
+  {% endblock %}
