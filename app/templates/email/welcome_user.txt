@@ -1,3 +1,4 @@
 Hello {{user.username}}
-Welcome to Watchlist
-We have just seen you have signed up for our application and want to welcome you to the family. Please enjoy the reviews of all your  favourite films.
+Welcome to MEGA: MEGA stands for Make Earth Great & Awesome
+You are officially a Megaminder. Get ready to interact with fellow Megaminders, explore ideas, invent and innovate.
+You are the next Nikola Tesla or Marie Curie. But most importantly, YOU ARE YOU and THAT IS YOUR POWER.

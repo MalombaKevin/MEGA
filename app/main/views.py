@@ -17,7 +17,8 @@ def index():
 @main.route('/megaminds')
 @login_required
 def megaminds():
-    return render_template('megaminds.html')
+    return render_template("megaminds.html")
+    
 
 @main.route('/user/<uname>')
 def profile(uname):

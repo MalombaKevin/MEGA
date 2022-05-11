@@ -11,6 +11,8 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    megapitch_id = db.Column(db.Integer,db.ForeignKey('megapitch.id'))
+    
     
     pass_secure = db.Column(db.String(255))
     @property
@@ -41,3 +43,17 @@ class Role(db.Model):
 
     def __repr__(self):
         return f'User {self.name}'
+
+class Megapitch(db.Model):
+        __tablename__ = 'megapitch'
+
+        id =db.Column(db.Integer,primary_key = True)
+        title= db.Column(db.String(255))
+        theme = db.Column(db.String(255))
+        pitch = db.Column(db.String(255))
+        contributors= db.Column(db.String(255))
+        users = db.relationship('User',backref = 'role',lazy="dynamic")
+        
+
+
+        
