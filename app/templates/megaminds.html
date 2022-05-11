@@ -16,13 +16,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link " href="/">HOME <span class="sr-only"></span></a>
-            <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                <span class="nav-item nav-link " href="/">HOME <span class="sr-only"></span>
                 {% if current_user.is_authenticated %}
-                <span style="color:white;padding:15px;">{{current_user.username}}</span>
-                <span><a href="{{url_for('auth.logout')}}">Sign out</a></span>
+                <a href="{{url_for('main.profile',uname=current_user.username)}}" class="nav-item nav-link ">Profile</a>
+                <a href="{{url_for('auth.logout')}}" class="nav-item nav-link ">Sign out</a></li>
                 {% else %}
-                <span><a href="{{url_for('auth.login')}}">Sign in</a></span>
+                <a href="{{url_for('auth.login')}}" class="nav-item nav-link ">Sign in</a>
                 {%endif%}
               </ul>
             
