@@ -1,12 +1,20 @@
 {% extends 'base.html'%}
-{% block title %}My Profile{% endblock %}
+{% block title %}Cheers {{user.username}}!{% endblock %}
 {% block content %}
 <div class="container">
   <div class="row">
     <!-- displaying  Username-->
     <div class="col-md-4">
+      
+      {% if user.profile_pic_path %}
 
-      <h3> {{user.username| capitalize}}</h3>
+      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" style="border-radius:50%">
+
+      {%else%}
+      <p>No profile picture</p>
+
+      {% endif %}
+      <h2 style="font-weight:bolder"> {{user.username| capitalize}}</h2>
 
 
       <!--Displaying user bio-->
@@ -16,21 +24,11 @@
       <p> {{user.username| capitalize}} has no bio </p>
       {% endif %}
 
-      {% if user.profile_pic_path %}
-
-      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
-
-      {%else%}
-      <p>No profile picture</p>
-
-      {% endif %}
 
 
     
 
-    <!--Display profile photo-->
-
-   <br><br> <details>
+    <details>
       <summary title="Profile Settings"><i class="fa-solid fa-gear" style="font-size:xx-large"></i> </summary>
       {% if user == current_user %}
       <div align="center">
