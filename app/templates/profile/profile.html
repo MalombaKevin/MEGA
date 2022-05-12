@@ -1,10 +1,10 @@
 {% extends 'base.html'%}
 {% block title %}Cheers {{user.username}}!{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container-fluid" style="margin-left:5%">
   <div class="row">
     <!-- displaying  Username-->
-    <div class="col-md-4">
+    <div class="col-sm-3">
       
       {% if user.profile_pic_path %}
 
@@ -14,7 +14,7 @@
       <p>No profile picture</p>
 
       {% endif %}
-      <h2 style="font-weight:bolder"> {{user.username| capitalize}}</h2>
+      <h2 style="font-weight:bolder"> {{user.username| capitalize}} <i class="fa-solid fa-rocket" style="color:blue"></i></h2>
       <hr
 
 
@@ -30,7 +30,7 @@
     
 
     <details>
-      <summary title="Profile Settings"><i class="fa-solid fa-gear" style="font-size:xx-large"></i> </summary>
+      <summary title="Profile Settings"><i class="fa-solid fa-gear" style="font-size:xx-large; color:red"></i> </summary>
       {% if user == current_user %}
       <div align="center">
       <a href="{{url_for('main.update_profile',uname=user.username)}}" style="text-decoration:none;"><imput style="text-decoration:none;font-size: medium; border:1px gold solid;color:blue; border-radius: 5rem; padding:6px">Update Bio</input></a>
@@ -48,6 +48,19 @@
 
     </details>
     <hr>
+    <div align="center">
+      <a href="{{url_for('main.megaminds',uname=user.username)}}" style="text-decoration:none;"><imput style="text-decoration:none;font-size: medium; border:1px gold solid;color:blue; border-radius: 5rem; padding:6px">Pitch it</input></a>
+      </div><br>
+    
+
+   
+  </div>
+  <div class="col-md-8" align="center">
+    <h1>MEGA-Mine</h1>
+    <hr> 
+
+
+
   </div>
   </div>
 

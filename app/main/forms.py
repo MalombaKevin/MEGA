@@ -1,7 +1,9 @@
+from turtle import title
+from typing import Optional
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField
-from wtforms.validators import DataRequired,Email,EqualTo
-from ..models import User
+from wtforms import StringField,PasswordField,SubmitField,SelectField
+from wtforms.validators import DataRequired,Email,EqualTo, Optional
+from ..models import User, Megapitch
 from wtforms import ValidationError
 from wtforms import StringField,PasswordField,BooleanField,SubmitField,TextAreaField
 
@@ -28,3 +30,12 @@ class LoginForm(FlaskForm):
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [DataRequired()])
     submit = SubmitField('Submit')
+
+class addMegaPitch(FlaskForm):
+    theme = SelectField('Choose Theme Project',choices=[('Science', 'Science'),('Engineering', 'Engineering')],validators= [Optional()] )
+    title = StringField('Enter project title',validators = [DataRequired()])
+    contributors = StringField('Enter project contributors',validators = [DataRequired()])
+    pitch = TextAreaField('Tell us about you.',validators = [DataRequired()])
+    submit = SubmitField('Pitch it')
+
+    

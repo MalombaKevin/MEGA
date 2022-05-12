@@ -1,9 +1,8 @@
 from flask import render_template,redirect,url_for, abort, request
-
-from app.models import User
+from app.models import Megapitch, User
 from . import main
-from flask_login import login_required
-from .forms import UpdateProfile
+from flask_login import login_required, current_user
+from .forms import UpdateProfile, addMegaPitch
 from .. import db
 from .. import db,photos
 
@@ -14,11 +13,30 @@ def index():
   
     return render_template('index.html')
 
-@main.route('/megaminds')
+@main.route('/megapitch/new')
 @login_required
 def megaminds():
-    return render_template("megaminds.html")
+    user = User.query.filter_by(id = current_user.id).first()
+
+
+    if user is None:
+        abort(404)
     
+    megaForm=addMegaPitch()
+
+    if megaForm.validate_on_submit():
+        theme = megaForm.theme.data
+        title = megaForm.title.data
+        contributors = megaForm.contributors.data
+        pitch = megaForm.pitch.data
+
+        new_mega_pitch = Megapitch(theme=theme, title=title, contributors=contributors, pitch=pitch)
+    
+        new_mega_pitch.save_megapitch()
+        return redirect(url_for('.profile',uname=user.username))
+    return render_template('profile/megapitch.html', megaForm = megaForm)
+    
+   
 
 @main.route('/user/<uname>')
 def profile(uname):

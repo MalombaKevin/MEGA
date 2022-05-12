@@ -10,7 +10,7 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True,index = True)
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+#     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     megapitch_id = db.Column(db.Integer,db.ForeignKey('megapitch.id'))
     
     
@@ -34,15 +34,15 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'User {self.username}'
 
-class Role(db.Model):
-    __tablename__ = 'roles'
+# class Role(db.Model):
+#     __tablename__ = 'roles'
 
-    id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-    users = db.relationship('User',backref = 'role',lazy="dynamic")
+#     id = db.Column(db.Integer,primary_key = True)
+#     name = db.Column(db.String(255))
+#     users = db.relationship('User',backref = 'role',lazy="dynamic")
 
-    def __repr__(self):
-        return f'User {self.name}'
+#     def __repr__(self):
+#         return f'User {self.name}'
 
 class Megapitch(db.Model):
         __tablename__ = 'megapitch'
@@ -54,6 +54,20 @@ class Megapitch(db.Model):
         contributors= db.Column(db.String(255))
         users = db.relationship('User',backref = 'role',lazy="dynamic")
         
+
+def save_megapitch(self):
+        db.session.add(self)
+        db.session.commit()
+
+@classmethod
+def get_megapitch(cls, theme):
+        megapitches = Megapitch.query.filter_by(theme=theme).all()
+        return megapitches
+
+
+def __repr__(self):
+        return  
+
 
 
         
