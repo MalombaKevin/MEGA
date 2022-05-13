@@ -13,9 +13,16 @@ def index():
   
     return render_template('index.html')
 
-@main.route('/megapitch/new')
-@login_required
+@main.route('/megaminds')
 def megaminds():
+    
+    return render_template('megaminds.html')
+
+   
+
+@main.route('/megapitch/new' ,methods = ['GET','POST'])
+@login_required
+def megapitch():
     user = User.query.filter_by(id = current_user.id).first()
 
 
@@ -25,17 +32,21 @@ def megaminds():
     megaForm=addMegaPitch()
 
     if megaForm.validate_on_submit():
-        theme = megaForm.theme.data
-        title = megaForm.title.data
-        contributors = megaForm.contributors.data
-        pitch = megaForm.pitch.data
+        user.theme = megaForm.theme.data
+        user.title = megaForm.title.data
+        user.contributors = megaForm.contributors.data
+        user.pitch = megaForm.pitch.data
 
-        new_mega_pitch = Megapitch(theme=theme, title=title, contributors=contributors, pitch=pitch)
+        db.session.add(user)
+        db.session.commit()
+
+      
     
-        new_mega_pitch.save_megapitch()
+        
         return redirect(url_for('.profile',uname=user.username))
     return render_template('profile/megapitch.html', megaForm = megaForm)
-    
+
+
    
 
 @main.route('/user/<uname>')

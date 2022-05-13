@@ -5,20 +5,19 @@
   <div class="row">
     <!-- displaying  Username-->
     <div class="col-sm-3">
-      
+
       {% if user.profile_pic_path %}
 
-      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" style="border-radius:50%">
+      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail"
+        style="border-radius:50%">
 
       {%else%}
       <p>No profile picture</p>
 
       {% endif %}
-      <h2 style="font-weight:bolder"> {{user.username| capitalize}} <i class="fa-solid fa-rocket" style="color:blue"></i></h2>
-      <hr
-
-
-      <!--Displaying user bio-->
+      <h2 style="font-weight:bolder"> {{user.username| capitalize}} <i class="fa-solid fa-rocket"
+          style="color:blue"></i></h2>
+      <hr <!--Displaying user bio-->
       {% if user.bio %}
       <h4>{{user.bio}}</h4>
       {%else%}
@@ -27,41 +26,52 @@
 
 
 
-    
 
-    <details>
-      <summary title="Profile Settings"><i class="fa-solid fa-gear" style="font-size:xx-large; color:red"></i> </summary>
-      {% if user == current_user %}
+
+      <details>
+        <summary title="Profile Settings"><i class="fa-solid fa-gear" style="font-size:xx-large; color:blue"></i>
+        </summary>
+        {% if user == current_user %}
+        <div align="center">
+          <a href="{{url_for('main.update_profile',uname=user.username)}}" style="text-decoration:none;">
+            <imput
+              style="text-decoration:none;font-size: medium; border:1px gold solid;color:blue; border-radius: 5rem; padding:6px">
+              Update Bio</input>
+          </a>
+        </div><br>
+        {% endif %}
+
+        {% if user == current_user %}
+        <form action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype="multipart/form-data"
+          align="center">
+
+          <input type="file" name="photo" class="form-control" required><br>
+          <input type="submit" value="Update Pic"
+            style="border:1px gold solid;;font-size:medium;color:blue; border-radius:5rem; background-color:transparent">
+        </form>
+        {% endif %}
+
+
+      </details>
+      <hr>
       <div align="center">
-      <a href="{{url_for('main.update_profile',uname=user.username)}}" style="text-decoration:none;"><imput style="text-decoration:none;font-size: medium; border:1px gold solid;color:blue; border-radius: 5rem; padding:6px">Update Bio</input></a>
+        <a href="{{url_for('main.megapitch',uname=user.username)}}" style="text-decoration:none;">
+          <malomba style="text-decoration:none;font-size: x-large;">
+            <i class="fa-solid fa-lightbulb" style="font-size:200%;color:red" title="PITCH YOUR LIGHT TO THE WORLD"></i>
+          </malomba>
+        </a>
       </div><br>
-      {% endif %}
-
-      {% if user == current_user %}
-      <form action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype="multipart/form-data" align="center">
-
-        <input type="file" name="photo" class="form-control" required><br>
-        <input type="submit" value="Update Pic" style="border:1px gold solid;;font-size:medium;color:blue; border-radius:5rem; background-color:transparent">
-      </form>
-      {% endif %} 
-      
-
-    </details>
-    <hr>
-    <div align="center">
-      <a href="{{url_for('main.megaminds',uname=user.username)}}" style="text-decoration:none;"><imput style="text-decoration:none;font-size: medium; border:1px gold solid;color:blue; border-radius: 5rem; padding:6px">Pitch it</input></a>
-      </div><br>
-    
-
-   
-  </div>
-  <div class="col-md-8" align="center">
-    <h1>MEGA-Mine</h1>
-    <hr> 
 
 
 
-  </div>
+    </div>
+    <div class="col-md-8" align="center">
+      <h1>MEGA-Mine</h1>
+      <hr>
+
+      <p>{{user.theme}}</p>
+
+    </div>
   </div>
 
 

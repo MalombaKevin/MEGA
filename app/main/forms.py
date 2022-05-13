@@ -32,10 +32,11 @@ class UpdateProfile(FlaskForm):
     submit = SubmitField('Submit')
 
 class addMegaPitch(FlaskForm):
-    theme = SelectField('Choose Theme Project',choices=[('Science', 'Science'),('Engineering', 'Engineering')],validators= [Optional()] )
-    title = StringField('Enter project title',validators = [DataRequired()])
-    contributors = StringField('Enter project contributors',validators = [DataRequired()])
-    pitch = TextAreaField('Tell us about you.',validators = [DataRequired()])
+    theme = SelectField('Choose Project Theme',choices=[(' ', ''),('Biochemistry', 'Biochemistry'),('Engineering', 'Engineering'),('Architecture', 'Architecture'),('Art', 'Art'),('IT-Hardware', 'IT-Hardware'),('IT-Software', 'IT-Software')],validators= [Optional()] )
+    title = StringField('Project Title',validators = [DataRequired()])
+    pitch = TextAreaField('Project Breakdown',validators = [DataRequired()])
+    contributors = StringField('Project Contributors',validators = [DataRequired()]) 
+    # country = SelectField('Country',choices=[(' ', ''),('Kenya', 'Kenya'),('Uganda', 'Uganda'),('Tanzania', 'Tanzania'),('Rwanda', 'Rwanda'),('Burundi', 'Burundi'),('Somalia', 'Somalia')],validators= [Optional()] )   
     submit = SubmitField('Pitch it')
 
     

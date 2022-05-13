@@ -1,12 +1,26 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
+{% block title %}Time To Change the World {{current_user.username | capitalize}}!{% endblock %}
 
 {% block content %}
 
-<div class="container">
-  {{wtf.quick_form(megaForm)}}
+<div class="container" style="font-size:large">
+  <div class="rows">
+    <div class="col-md-2">
+      <a href="{{url_for('main.profile',uname=current_user.username)}}"><i class="fa-solid fa-circle-arrow-left"
+          style="font-size:300%;color:blue" title="Back To Profile"></i></a>
+    </div>
+    <div class="col-md-8" style="margin-top:3%">
+      {{wtf.quick_form(megaForm)}}
+    </div>
+  </div>
+
+
+
 </div>
 
-  
+
+
+
 
 {% endblock %}
