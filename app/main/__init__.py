@@ -1,7 +1,7 @@
 from ensurepip import bootstrap
 from flask import Blueprint, Flask
 main = Blueprint('main', __name__)
-from app.config import config_options
+from config import config_options
 from . import errors, views
 
 
