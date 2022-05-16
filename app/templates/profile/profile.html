@@ -13,7 +13,7 @@
       {% if user.profile_pic_path %}
 
       <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail"
-        style="border-radius:50%">
+        >
 
       {%else%}
       <p>Add profile picture </p>
@@ -97,7 +97,7 @@
         {% if pitches %}
         {% for pitch in pitches %}
         <div class="col-md-6">
-          <div class="panel panel-default" style="width:50rem;font-size:large">
+          <div class="panel panel-default" style="width:100%;font-size:large">
             <div class="panel-heading" style="background-color:whitesmoke; color:black;font-weight:900">
               <malomba style="color:blue"> Theme:</malomba> {{pitch.theme}}
 
