@@ -6,7 +6,7 @@ from app.models import Megapitch, User
 from app import create_app
 
 
-app = create_app('production')
+app = create_app('development')
 
 manager = Manager(app)
 manager.add_command('server',Server)
