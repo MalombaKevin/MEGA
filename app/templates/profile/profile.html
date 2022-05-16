@@ -1,6 +1,10 @@
 {% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
 {% block title %}Cheers {{user.username}}!{% endblock %}
 {% block content %}
+
+
+
 <div class="container-fluid" style="margin-left:5%">
   <div class="row">
     <!-- displaying  Username-->
@@ -12,7 +16,22 @@
         style="border-radius:50%">
 
       {%else%}
-      <p>No profile picture</p>
+      <p>Add profile picture </p>
+      <details>
+        <summary title="Profile Settings"><i class="fa-solid fa-gear" style="font-size:xx-large; color:blue"></i>
+        </summary>
+        {% if user == current_user %}
+        <form action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype="multipart/form-data"
+          align="center">
+
+          <input type="file" name="photo" class="form-control" required><br>
+          <input type="submit" value="Update Pic"
+            style="border:1px gold solid;;font-size:medium;color:blue; border-radius:5rem; background-color:transparent">
+        </form>
+        {% endif %}
+
+
+      </details>
 
       {% endif %}
       <h2 style="font-weight:bolder"> {{user.username| capitalize}} <i class="fa-solid fa-rocket"
@@ -21,7 +40,7 @@
       {% if user.bio %}
       <h4>{{user.bio}}</h4>
       {%else%}
-      <p> {{user.username| capitalize}} has no bio </p>
+      <p> Add bio </p>
       {% endif %}
 
 
@@ -53,6 +72,11 @@
 
 
       </details>
+
+
+
+
+      </details>
       <hr>
       <div align="center">
         <a href="{{url_for('main.megapitch',uname=user.username)}}" style="text-decoration:none;">
@@ -69,7 +93,59 @@
       <h1>MEGA-Mine</h1>
       <hr>
 
-      <p>{{user.theme}}</p>
+      <div>
+        {% if pitches %}
+        {% for pitch in pitches %}
+        <div class="col-md-6">
+          <div class="panel panel-default" style="width:50rem;font-size:large">
+            <div class="panel-heading" style="background-color:whitesmoke; color:black;font-weight:900">
+              <malomba style="color:blue"> Theme:</malomba> {{pitch.theme}}
+
+            </div>
+
+
+
+            <div class="panel-body">
+
+              <span style="text-decoration: underline;font-weight: 900;">{{pitch.title}}</span>:<br>{{pitch.pitch}}<br>
+              <hr>
+
+              By {{pitch.contributors}} from {{pitch.country}}
+
+            </div>
+            <div class="panel-footer">
+              <div class="row">
+                <div class="col-md-4">
+                  <i class="fa-solid fa-heart" style="font-size:xx-large; color:red"></i>
+                </div>
+                <div class="col-md-4">
+                  <i class="fa-solid fa-thumbs-down" style="font-size:xx-large; color:black"></i>
+                </div>
+                <div class="col-md-4">
+                  <i class="fa-solid fa-comments" style="font-size:xx-large; color:blue" title="Comments"></i>
+                </div>
+
+              </div>
+
+
+            </div>
+          </div>
+
+        </div>
+        {% endfor %}
+        {% else %}
+      <h4>ADD A PITCH</h4>
+      <a href="{{url_for('main.megapitch',uname=user.username)}}" style="text-decoration:none;">
+        <malomba style="text-decoration:none;font-size: x-large;">
+          <i class="fa-solid fa-lightbulb" style="font-size:200%;color:gold" title="PITCH YOUR LIGHT TO THE WORLD"></i>
+        </malomba>
+      </a>
+
+      {% endif %}
+
+
+
+
 
     </div>
   </div>

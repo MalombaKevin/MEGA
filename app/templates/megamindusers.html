@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+{% block content%}
+<div class="container-fluid">
+
+    {% if globalusers %}
+    {% for user in globalusers %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default" style="width:35rem; font-size:x-large">
+                <div class="panel-heading">
+                    Megaminder {{user.id}} <span style="margin-left:40%; color:green" ><i class="fa-brands fa-whatsapp" style="font-size:xx-large" title="Chat with {{user.username}}"></i></span>
+
+                </div>
+                <div>
+                    {% if user.profile_pic_path %}
+
+                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail"
+                        style="height:300px; width:100%">
+
+                    {%else%}
+                    <img src="https://www.kindpng.com/picc/m/22-223965_no-profile-picture-icon-circle-member-icon-png.png"
+                        alt="" class="img-thumbnail" style="height:300px; width:100%">
+
+                    {% endif%}<br>
+                </div >
+                <div>
+                <span style="color:blue">Name:</span> {{user.username}}<br>
+                <span style="color:blue">Bio:</span> {{user.bio}}<br>
+                                
+            </div>
+
+
+
+            </div>
+
+        </div>
+        {%else%}
+        <div class="container" align="center">
+            <p>No users</p>
+        </div>
+
+
+        {%endfor%}
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

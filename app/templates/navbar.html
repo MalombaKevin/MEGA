@@ -12,7 +12,8 @@
             <ul class="nav navbar-nav">
                 <ul class="nav navbar-nav navbar-right" style="font-size:medium;">
                     {% if current_user.is_authenticated %}
-                    <li><a href="{{url_for('main.megaminds')}}" title="Find pitches from all over the world">MegaMinds</a></li>
+                   <li><a href="{{url_for('main.megaminds')}}" title="Find pitches from all over the world">MegaMinds</a></li>
+                   <li><a href="{{url_for('main.megamindusers')}}" title="Find pitches from all over the world">MegaConnect</a></li>
                     <li><a href="{{url_for('main.profile',uname=current_user.username)}}"> My Profile</a></li>
                     <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
                     {% else %}

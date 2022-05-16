@@ -1,4 +1,4 @@
+export MAIL_USERNAME='billionmillion333@gmail.com'
+export MAIL_PASSWORD='billion333million'
 export SECRET_KEY="megaminds"
-export MAIL_USERNAME='kevinmalomba014@gmail.com'
-export MAIL_PASSWORD='malomba28'
-python3.8 manage.py server
+python3 manage.py server

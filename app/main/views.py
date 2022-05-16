@@ -1,3 +1,4 @@
+from threading import currentThread
 from flask import render_template,redirect,url_for, abort, request
 from app.models import Megapitch, User
 from . import main
@@ -15,8 +16,25 @@ def index():
 
 @main.route('/megaminds')
 def megaminds():
+    globalusers= Megapitch.query.all()
+
     
-    return render_template('megaminds.html')
+    return render_template('megaminds.html', globalusers= globalusers)
+
+@main.route('/megaminds/theme/<theme>')
+def megamindtheme(theme):
+    
+    globaltheme = Megapitch.get_megapitch(theme=theme)
+    
+    
+    return render_template('megamindthemes.html', globaltheme = globaltheme )
+
+@main.route('/megaminds/users/')
+def megamindusers():
+    
+    globalusers = User.query.all()    
+    
+    return render_template('megamindusers.html',globalusers=globalusers )
 
    
 
@@ -32,15 +50,17 @@ def megapitch():
     megaForm=addMegaPitch()
 
     if megaForm.validate_on_submit():
-        user.theme = megaForm.theme.data
-        user.title = megaForm.title.data
-        user.contributors = megaForm.contributors.data
-        user.pitch = megaForm.pitch.data
+        theme = megaForm.theme.data
+        title = megaForm.title.data
+        contributors = megaForm.contributors.data
+        pitch = megaForm.pitch.data
+        country = megaForm.country.data
+        user_id = current_user._get_current_object().id
+          
+        new_megapitch_object=Megapitch(theme=theme, title=title, contributors=contributors,pitch=pitch, country=country, user_id=user_id)
+     
 
-        db.session.add(user)
-        db.session.commit()
-
-      
+        new_megapitch_object.save_megapitch()    
     
         
         return redirect(url_for('.profile',uname=user.username))
@@ -52,11 +72,17 @@ def megapitch():
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
+   
 
     if user is None:
         abort(404)
+    
 
-    return render_template("profile/profile.html", user = user)
+    user_id =current_user._get_current_object().id
+    all_mega_pitches = Megapitch.query.filter_by(user_id = user_id).all()
+    
+
+    return render_template("profile/profile.html", user = user, pitches= all_mega_pitches)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required

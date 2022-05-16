@@ -1,14 +1,80 @@
 {% extends 'base.html'%}
 {% block title %}MEGAMINDS{% endblock %} 
 {% block content %}
+
+
 <div class="container-fluid">
-<div class = "row">
-<div class = "col-md 2">
+ 
 
-        
-</div>
+<div class ="row">
+<div class = "col-md-12" align="center">
+    <h3>Trending topics</h3>
+    <span style="font-size:x-large">
+    <a href ="{{url_for("main.megamindtheme", theme='Biochemistry')}}"><button style="border-radius:5rem; background-color: none;border:1px gold solid;">Biochemistry</button></a>
+    <a href ="{{url_for("main.megamindtheme", theme='Engineering')}}"><button style="border-radius:5rem; background-color: none;border:1px gold solid;">Engineering</button></a>
+    <a href ="{{url_for("main.megamindtheme", theme='IT-Hardware')}}"><button style="border-radius:5rem; background-color: none;border:1px gold solid;">IT-Hardware</button></a>
+    <a href ="{{url_for("main.megamindtheme", theme='IT-Software')}}"><button style="border-radius:5rem; background-color: none;border:1px gold solid;">IT-Software</button></a>
+    <a href ="{{url_for("main.megamindtheme", theme='Art')}}"><button style="border-radius:5rem; background-color: none;border:1px gold solid;">ART</button></a>
+   
+  </span>
+  
+    <hr>
+    
+     <h1>MEGA-IDEAS</h1>
 
-<div class = "col-md-10">
+    {% if globalusers %}
+      {% for pitch in globalusers %}
+        <div class="col-md-4">
+        <div class="panel panel-default" style="width:50rem;font-size:large">
+          <div class="panel-heading" style="background-color:whitesmoke; color:black;font-weight:900">
+            <malomba style="color:blue"> Theme:</malomba> {{pitch.theme}}
+
+          </div>
+
+
+
+          <div class="panel-body">
+
+            <span style="text-decoration: underline;font-weight: 900;">{{pitch.title}}</span>:<br>{{pitch.pitch}}<br>
+            <hr>
+
+            By {{pitch.contributors}} from {{pitch.country}}
+
+          </div>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-md-4">
+                <i class="fa-solid fa-heart" style="font-size:xx-large; color:red"></i>
+              </div>
+              <div class="col-md-4">
+                <i class="fa-solid fa-thumbs-down" style="font-size:xx-large; color:black"></i>
+              </div>
+              <div class="col-md-4">
+                <i class="fa-solid fa-comments" style="font-size:xx-large; color:blue" title="Comments"></i>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+
+      
+      {% endfor %}
+      {% else %}
+      <div class="container"align="center" >
+        <h4>ADD A PITCH</h4>
+        <a href="{{url_for('main.megapitch')}}" style="text-decoration:none;">
+          <malomba style="text-decoration:none;font-size: x-large;">
+            <i class="fa-solid fa-lightbulb" style="font-size:200%;color:gold" title="PITCH YOUR LIGHT TO THE WORLD"></i>
+          </malomba>
+    </div>
+      {%endif%}
+      
+
 
         
         
